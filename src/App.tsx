@@ -1,22 +1,22 @@
-import './App.css';
+import './App.css'
 import { useState } from 'react';
 import { Grid } from '@mui/material';
-import CircularProgress from '@mui/material/CircularProgress';
-import Alert from '@mui/material/Alert';
 import HeaderUI from './components/HeaderUI';
 import AlertUI from './components/AlertUI';
 import SelectorUI from './components/SelectorUI';
 import IndicatorUI from './components/IndicatorUI';
-import ChartUI from './components/ChartUI';
-import TableUI from './components/TableUI';
 import useFetchData from './hooks/useFetchData';
+import TableUI from './components/TableUI';
+import ChartUI from './components/ChartUI';
+import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
 
 function App() {
 
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
     const { data, loading, error } = useFetchData(selectedOption);
-
+    
     return (
         <Grid container spacing={5} sx={{ justifyContent: 'center', alignItems: 'center' }}>
 
@@ -28,7 +28,10 @@ function App() {
             {/* Alertas */}
             <Grid size={{ xs: 12, md: 12 }}
                 container sx={{ justifyContent: 'flex-end', alignItems: 'center' }}>
+
                 <AlertUI description="No se prevén lluvias" />
+                <AlertUI description="Índice UV alto" severity="warning" variant="filled" />
+
             </Grid>
 
             {/* Selector */}
@@ -72,7 +75,7 @@ function App() {
 
             </Grid>
 
-            {/* Gráfico */}
+            {/* Grafico */}
             <Grid size={{ xs: 12, md: 6 }} sx={{ display: { xs: 'none', md: 'block' } }}>
                 {data && (
                     <ChartUI
@@ -98,7 +101,7 @@ function App() {
             </Grid>
 
             {/* Información adicional */}
-            <Grid size={{ xs: 12, md: 12 }}>Elemento: Información adicional</Grid>
+            <Grid size={{ xs: 12 , md: 12 }}>Elemento: Información adicional</Grid>
 
         </Grid>
     );

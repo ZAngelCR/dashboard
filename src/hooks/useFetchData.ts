@@ -15,7 +15,7 @@ interface FetchDataOutput {
 }
 
 export default function useFetchData(selectedOption: string | null): FetchDataOutput {
-
+    
     const [data, setData] = useState<OpenMeteoResponse | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -23,7 +23,6 @@ export default function useFetchData(selectedOption: string | null): FetchDataOu
     useEffect(() => {
         const cityConfig = selectedOption != null ? CITY_COORDS[selectedOption] : CITY_COORDS['guayaquil'];
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${cityConfig.latitude}&longitude=${cityConfig.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m&hourly=temperature_2m,wind_speed_10m&timezone=America%2FGuayaquil&forecast_days=1`;
-
         const obtenerDatos = async () => {
             setLoading(true);
             setError(null);
@@ -38,11 +37,11 @@ export default function useFetchData(selectedOption: string | null): FetchDataOu
                 setError((e as Error).message);
             } finally {
                 setLoading(false);
-            }
+            }    
         };
 
         obtenerDatos();
     }, [selectedOption]); // El efecto se ejecuta cada vez que cambia la opción seleccionada
 
     return { data, loading, error };
-}
+ }
